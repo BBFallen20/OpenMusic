@@ -39,7 +39,7 @@ class Track(Model):
         return f"{self.title}"
 
     def get_absolute_url(self):
-        return reverse('tracks:track-detail', args=[self.slug])
+        return reverse('tracks:track', args=[self.slug])
 
     class Meta:
         verbose_name = 'Track'

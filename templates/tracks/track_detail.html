@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'template.html' %}
+{% block heading %}{{ track.title }}{% endblock %}
+{% block content %}
 
-</body>
-</html>
+    <div class="container">
+        <h2 class="center">{{ track.title }}</h2>
+        <p><strong>Description: </strong>{{ track.description }}</p>
+        <p><strong>Genre: </strong>{{ track.genre }}</p>
+        <p><strong>Author: </strong>{{ track.author }}</p>
+        <p><strong>Play: </strong>
+            {% if track.audio %}<audio controls preload="auto" id="track-med" src="{{ track.audio.url }}"></audio></p>{% endif %}
+    </div>
+{% endblock %}
