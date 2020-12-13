@@ -27,7 +27,7 @@ class Genre(Model):
         verbose_name_plural = 'Genres'
 
 
-class Tracks(Model):
+class Track(Model):
     title = models.CharField('Title', max_length=100, null=False)
     description = models.TextField('Description', default='', max_length=1000, null=False)
     audio = models.FileField('Audio', upload_to='media/', blank=True)
