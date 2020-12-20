@@ -7,9 +7,14 @@ from autoslug import AutoSlugField
 class Author(Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
+    description = models.TextField(max_length=10000, default="...")
+    slug = AutoSlugField(db_index=True, populate_from='last_name', unique=True, blank=True, editable=False)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
+    def get_absolute_url(self):
+        return reverse('tracks:author', args=[self.slug])
 
     class Meta:
         verbose_name = 'Author'
@@ -34,6 +39,7 @@ class Track(Model):
     genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True)
     author = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True)
     slug = AutoSlugField(populate_from='title', unique=True, db_index=True, editable=False, blank=True)
+    pubdate = models.DateTimeField(auto_created=True, null=True, editable=False)
 
     def __str__(self):
         return f"{self.title}"
@@ -44,3 +50,4 @@ class Track(Model):
     class Meta:
         verbose_name = 'Track'
         verbose_name_plural = 'Tracks'
+        ordering = ['-pubdate']

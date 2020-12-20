@@ -1,0 +1,15 @@
+{% extends 'template.html' %}
+
+{% block heading %}
+{{ author.first_name }} {{ author.last_name }}
+{% endblock %}
+{% block content %}
+
+    <h1 class="text-center">{{ author.first_name }} {{ author.last_name }}</h1>
+    <p><strong>Description: </strong>{{ author.description }}</p>
+    <h2 class="text-center">Author track list:</h2>
+    {% for track in Tracks %}
+        <h2 class="text-center"><a href="{{ track.get_absolute_url }}">{{ track.title }}</a></h2>
+    {% endfor %}
+
+{% endblock %}
