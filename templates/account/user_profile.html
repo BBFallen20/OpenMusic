@@ -1,0 +1,12 @@
+{% extends 'account/base.html' %}
+
+{% block content %}
+    {% if user.socialaccount_set.all.0.provider %}
+        <p>{{ user.socialaccount_set.all.0.extra_data.name }}</p>
+            <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="">
+        <p>{{ user.socialaccount_set.all.0.provider }}</p>
+    {% else %}
+        {{ user }}
+    {% endif %}
+    <p><a href="{% url 'track_add'%}">Add new Track</a></p>
+{% endblock %}

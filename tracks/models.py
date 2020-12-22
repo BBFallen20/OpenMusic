@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db.models import Model
 from django.db import models
 from django.urls import reverse
@@ -39,7 +40,8 @@ class Track(Model):
     genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True)
     author = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True)
     slug = AutoSlugField(populate_from='title', unique=True, db_index=True, editable=False, blank=True)
-    pubdate = models.DateTimeField(auto_created=True, null=True, editable=False)
+    pubdate = models.DateTimeField(auto_now_add=True, null=True, editable=False)
+    pub_by = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
         return f"{self.title}"

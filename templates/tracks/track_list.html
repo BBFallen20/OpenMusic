@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <h2 class="center"><a href="{{ track.get_absolute_url }}">{{ track.title }}</a></h2>
             <p><strong>Description: </strong>{{ track.description }}</p>
-            <p><strong>Genre: </strong>{{ track.genre }}</p>
+            <p><strong>Genre: </strong><a href="{% url 'tracks:tracks' track.genre %}">{{ track.genre }}</a></p>
             <p><strong>Author: </strong>{{ track.author }}</p>
             {% if track.audio %}<audio id="track-med" preload="auto" src="{{ track.audio.url }}"></audio></p>{% endif %}
             <button onclick="play()">Preview</button>
         </div>
-        <hr>
+        <hr class="end-hr">
     {% endfor %}
         <script src={% static "audio_stopper.js" %}></script>
 {% endblock %}
