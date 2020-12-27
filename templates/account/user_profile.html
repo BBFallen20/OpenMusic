@@ -6,7 +6,28 @@
             <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="">
         <p>{{ user.socialaccount_set.all.0.provider }}</p>
     {% else %}
-        {{ user }}
+        {{ userprofile.User }}
+            {% if userprofile.image %}
+            <img src="{{ userprofile.image.url }}" alt="" width="100px" height="100px" style="border-radius: 50%;border: 1px solid; border-color: whitesmoke">
+            {% else %}
+            <img src="../../media/accounts/profile/photo_2020-09-29_16-13-49.jpg" alt="" width="100px" height="100px" style="border-radius: 50%;border: 1px solid; border-color: whitesmoke">
+            {% endif %}
+
+            <p>{{ userprofile.description }}</p>
+        <br>
+        <form action="" method="post" id="add_form" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+            {% if messages %}
+                    <div class="alert alert-success">
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+        <button class="btn btn-secondary" form="add_form" type="submit">Save</button>
+
+        </form>
     {% endif %}
     <p><a href="{% url 'track_add'%}">Add new Track</a></p>
 {% endblock %}

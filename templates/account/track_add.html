@@ -1,6 +1,6 @@
 {% extends 'template.html' %}
 {% block content %}
-<form action="{% url 'track_add' %}" method="post" id="track_form">
+<form action="{% url 'track_add' %}" method="post" id="track_form" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form }}
     <input type="submit" name="submit" value="Add Track" class="btn btn-primary">

@@ -8,6 +8,7 @@
             <p><strong>Description: </strong>{{ track.description }}</p>
             <p><strong>Genre: </strong><a href="{% url 'tracks:tracks' track.genre %}">{{ track.genre }}</a></p>
             <p><strong>Author: </strong>{{ track.author }}</p>
+            <p><strong>Published by: </strong><a href="{% url 'profile' track.pub_by %}">{{ track.pub_by }}</a></p>
             {% if track.audio %}<audio id="track-med" preload="auto" src="{{ track.audio.url }}"></audio></p>{% endif %}
             <button onclick="play()">Preview</button>
         </div>

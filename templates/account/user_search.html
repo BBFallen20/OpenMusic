@@ -1,0 +1,33 @@
+{% extends 'account/base.html' %}
+
+{% block content %}
+    {% if userprofile.User.socialaccount_set.all.0.provider %}
+        <p>{{ userprofile.User.socialaccount_set.all.0.extra_data.name }}</p>
+            <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="">
+        <p>{{ userprofile.User.socialaccount_set.all.0.provider }}</p>
+    {% else %}
+        {{ userprofile.User }}
+            {% if userprofile.image %}
+            <img src="{{ userprofile.image.url }}" alt="" width="100px" height="100px" style="border-radius: 50%;border: 1px solid; border-color: whitesmoke">
+            {% else %}
+            <img src="../../media/accounts/profile/photo_2020-09-29_16-13-49.jpg" alt="" width="100px" height="100px" style="border-radius: 50%;border: 1px solid; border-color: whitesmoke">
+            {% endif %}
+
+            <p>{{ userprofile.description }}</p>
+        <br>
+        <h2 class="text-center">User tracks:</h2>
+    {% for track in published %}
+
+        <div class="container-fluid">
+            <h2 class="center"><a href="{{ track.get_absolute_url }}">{{ track.title }}</a></h2>
+            <p><strong>Description: </strong>{{ track.description }}</p>
+            <p><strong>Genre: </strong><a href="{% url 'tracks:tracks' track.genre %}">{{ track.genre }}</a></p>
+            <p><strong>Author: </strong>{{ track.author }}</p>
+            {% if track.audio %}<audio id="track-med" controls preload="auto" src="{{ track.audio.url }}"></audio></p>{% endif %}
+        </div>
+        <hr class="end-hr">
+
+    {% endfor %}
+
+    {% endif %}
+{% endblock %}
